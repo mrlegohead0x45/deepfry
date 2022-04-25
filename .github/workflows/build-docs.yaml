@@ -1,3 +1,5 @@
+name: Build & publish docs
+
 on:
   push:
     branches: [main]

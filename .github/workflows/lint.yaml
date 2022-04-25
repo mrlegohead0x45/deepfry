@@ -1,4 +1,4 @@
-name: Test with pytest
+name: Lint with flake8 and mypy
 
 on:
   push:
@@ -26,6 +26,8 @@ jobs:
           os: windows-latest
           python-version: py3.10
 
-      - name: Test
-        working-directory: ${{ github.workspace }}/tests
-        run: pytest
+      - name: Run flake8
+        run: flake8 ${{ github.workspace }} ${{ github.workspace }}/tests
+
+      - name: Run mypy
+        run: mypy ${{ github.workspace }} ${{ github.workspace }}/tests

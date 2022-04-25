@@ -1,20 +1,13 @@
-name: Test with pytest
+name: Check docs build
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "deepfry/**"
-      - "tests/**"
-
   pull_request:
     branches: [main]
     paths:
-      - "deepfry/**"
-      - "tests/**"
+      - docs/**
 
 jobs:
-  test:
+  publish-docs:
     runs-on: windows-latest
     steps:
       - name: Checkout repo
@@ -26,6 +19,6 @@ jobs:
           os: windows-latest
           python-version: py3.10
 
-      - name: Test
-        working-directory: ${{ github.workspace }}/tests
-        run: pytest
+      - name: Build docs
+        working-directory: ${{ github.workspace }}/docs
+        run: .\make.bat html

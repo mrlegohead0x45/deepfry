@@ -1,4 +1,4 @@
-name: Test with pytest
+name: Format with black and isort
 
 on:
   push:
@@ -26,6 +26,8 @@ jobs:
           os: windows-latest
           python-version: py3.10
 
-      - name: Test
-        working-directory: ${{ github.workspace }}/tests
-        run: pytest
+      - name: Run black
+        run: black ${{ github.workspace }} ${{ github.workspace }}/tests --check
+
+      - name: Run isort
+        run: isort ${{ github.workspace }} ${{ github.workspace }}/tests --check
