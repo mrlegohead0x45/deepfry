@@ -7,7 +7,7 @@ on:
       - docs/**
 
 jobs:
-  publish-docs:
+  check-docs:
     runs-on: windows-latest
     steps:
       - name: Checkout repo
