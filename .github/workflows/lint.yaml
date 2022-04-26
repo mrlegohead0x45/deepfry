@@ -27,7 +27,7 @@ jobs:
           python-version: py3.10
 
       - name: Run flake8
-        run: flake8 ${{ github.workspace }} ${{ github.workspace }}/tests
+        run: flake8 ${{ github.workspace }} ${{ github.workspace }}\tests
 
       - name: Run mypy
-        run: mypy ${{ github.workspace }} ${{ github.workspace }}/tests
+        run: mypy ${{ github.workspace }} ${{ github.workspace }}\tests

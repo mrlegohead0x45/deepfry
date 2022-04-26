@@ -33,14 +33,14 @@ jobs:
         run: |
           black `
             ${{ github.workspace }} `
-            ${{ github.workspace }}/tests `
-            ${{ github.workspace }}/docs/source/conf.py `
+            ${{ github.workspace }}\tests `
+            ${{ github.workspace }}\docs\source\conf.py `
             --check
 
       - name: Run isort
         run: |
           isort `
             ${{ github.workspace }} `
-            ${{ github.workspace }}/tests `
-            ${{ github.workspace }}/docs/source/conf.py `
+            ${{ github.workspace }}\tests `
+            ${{ github.workspace }}\docs\source\conf.py `
             --check
