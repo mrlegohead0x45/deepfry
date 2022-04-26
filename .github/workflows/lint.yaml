@@ -14,14 +14,14 @@ on:
       - "tests/**"
 
 jobs:
-  test:
+  lint:
     runs-on: windows-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Install and cache poetry
-        uses: mrlegohead0x45/clement-walter-poetry-action@v1
+        uses: mrlegohead0x45/clement-walter-poetry-action@v1.1
         with:
           os: windows-latest
           python-version: py3.10
