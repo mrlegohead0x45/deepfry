@@ -31,17 +31,18 @@ jobs:
 
       - name: Run black
         run: |
-          black `
-            ${{ github.workspace }} `
-            ${{ github.workspace }}\tests `
-            ${{ github.workspace }}\docs\source\conf.py `
-            --check
+          poetry run `
+            black `
+              ${{ github.workspace }} `
+              ${{ github.workspace }}\tests `
+              ${{ github.workspace }}\docs\source\conf.py `
+              --check
 
       - name: Run isort
         run: |
-          isort `
-            ${{ github.workspace }} `
-            ${{ github.workspace }}\tests `
-            ${{ github.workspace }}\docs\source\conf.py `
-            --check
-            
+          poetry run `
+            isort `
+              ${{ github.workspace }} `
+              ${{ github.workspace }}\tests `
+              ${{ github.workspace }}\docs\source\conf.py `
+              --check

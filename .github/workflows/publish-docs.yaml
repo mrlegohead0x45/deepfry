@@ -21,7 +21,9 @@ jobs:
 
       - name: Build docs
         working-directory: ${{ github.workspace }}/docs
-        run: sphinx-build -b html source build
+        run: |
+          poetry run `
+            sphinx-build -b html source build
 
       - name: Extract built files
         run: |
