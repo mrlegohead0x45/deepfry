@@ -21,8 +21,7 @@ jobs:
 
       - name: Build docs
         working-directory: ${{ github.workspace }}/docs
-        run: |
-          .\make.bat html
+        run: sphinx-build -b html source build
 
       - name: Extract built files
         run: |
@@ -36,7 +35,7 @@ jobs:
 
       - name: Commit and push the built docs
         env:
-          # the config file isn't on docs, and it complains so this silences it
+          # the config file isn't on th gh-pagers branch, and it complains so this silences it
           PRE_COMMIT_ALLOW_NO_CONFIG: 1
           # GITHUB_TOKEN:
         run: |

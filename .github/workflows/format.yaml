@@ -6,12 +6,15 @@ on:
     paths:
       - "deepfry/**"
       - "tests/**"
+      # we want to run the formatter on conf.py (but not the linter)
+      - "docs/source/conf.py"
 
   pull_request:
     branches: [main]
     paths:
       - "deepfry/**"
       - "tests/**"
+      - "docs/source/conf.py"
 
 jobs:
   test:
@@ -27,7 +30,17 @@ jobs:
           python-version: py3.10
 
       - name: Run black
-        run: black ${{ github.workspace }} ${{ github.workspace }}/tests --check
+        run: |
+          black `
+            ${{ github.workspace }} `
+            ${{ github.workspace }}/tests `
+            ${{ github.workspace }}/docs/source/conf.py `
+            --check
 
       - name: Run isort
-        run: isort ${{ github.workspace }} ${{ github.workspace }}/tests --check
+        run: |
+          isort `
+            ${{ github.workspace }} `
+            ${{ github.workspace }}/tests `
+            ${{ github.workspace }}/docs/source/conf.py `
+            --check

@@ -21,4 +21,4 @@ jobs:
 
       - name: Build docs
         working-directory: ${{ github.workspace }}/docs
-        run: .\make.bat html
+        run: sphinx-build -b html source build
