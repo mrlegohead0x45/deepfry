@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install and cache poetry
-        uses: mrlegohead0x45/clement-walter-poetry-action
+        uses: mrlegohead0x45/clement-walter-poetry-action@v1.2
         with:
           os: windows-latest
           python-version: py3.10
