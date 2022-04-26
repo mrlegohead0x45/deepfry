@@ -1,0 +1,41 @@
+name: Lint with flake8 and mypy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deepfry/**"
+      - "tests/**"
+
+  pull_request:
+    branches: [main]
+    paths:
+      - "deepfry/**"
+      - "tests/**"
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install and cache poetry
+        uses: ClementWalter/poetry-action@v1
+        with:
+          os: windows-latest
+          python-version: py3.10
+
+      - name: Run flake8
+        run: | 
+          poetry run `
+            flake8 `
+              ${{ github.workspace }} `
+              ${{ github.workspace }}\tests
+
+      - name: Run mypy
+        run: | 
+          poetry run `
+            mypy `
+              ${{ github.workspace }} ` 
+              ${{ github.workspace }}\tests

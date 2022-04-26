@@ -1,0 +1,46 @@
+name: Build & publish docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docs/**
+
+jobs:
+  publish-docs:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install and cache poetry
+        uses: ClementWalter/poetry-action@v1
+        with:
+          os: windows-latest
+          python-version: py3.10
+
+      - name: Build docs
+        working-directory: ${{ github.workspace }}/docs
+        run: |
+          poetry run `
+            sphinx-build -b html source build
+
+      - name: Extract built files
+        run: |
+          git checkout gh-pages
+
+          # remove other docs files
+          Remove-Item -Recurse ${{ github.workspace }}\docs\build\doctrees\,${{ github.workspace }}\docs\source\
+
+          # copy all the html to .
+          Move-Item -Force ${{ github.workspace }}\docs\build\html\* .
+
+      - name: Commit and push the built docs
+        env:
+          # the config file isn't on the gh-pages branch, and it complains so this silences it
+          PRE_COMMIT_ALLOW_NO_CONFIG: 1
+          # GITHUB_TOKEN:
+        run: |
+          git add ${{ github.workspace }}
+          git commit -m "Rebuild docs"
+          git push origin gh-pages

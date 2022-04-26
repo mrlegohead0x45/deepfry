@@ -1,0 +1,24 @@
+name: Check docs build
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - docs/**
+
+jobs:
+  check-docs:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install and cache poetry
+        uses: ClementWalter/poetry-action@v1
+        with:
+          os: windows-latest
+          python-version: py3.10
+
+      - name: Build docs
+        working-directory: ${{ github.workspace }}/docs
+        run: poetry run sphinx-build -b html source build

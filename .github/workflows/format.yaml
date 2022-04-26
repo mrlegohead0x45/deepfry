@@ -1,0 +1,48 @@
+name: Format with black and isort
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deepfry/**"
+      - "tests/**"
+      # we want to run the formatter on conf.py (but not the linter)
+      - "docs/source/conf.py"
+
+  pull_request:
+    branches: [main]
+    paths:
+      - "deepfry/**"
+      - "tests/**"
+      - "docs/source/conf.py"
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install and cache poetry
+        uses: ClementWalter/poetry-action@v1
+        with:
+          os: windows-latest
+          python-version: py3.10
+
+      - name: Run black
+        run: |
+          poetry run `
+            black `
+              ${{ github.workspace }} `
+              ${{ github.workspace }}\tests `
+              ${{ github.workspace }}\docs\source\conf.py `
+              --check
+
+      - name: Run isort
+        run: |
+          poetry run `
+            isort `
+              ${{ github.workspace }} `
+              ${{ github.workspace }}\tests `
+              ${{ github.workspace }}\docs\source\conf.py `
+              --check
