@@ -32,7 +32,7 @@ runs:
       run: |
         $poetry_version = "${{ inputs.poetry_version }}"
         if ($poetry_version -eq "latest"){
-          $poetry_version = (gh api repos/python-poetry/poetry/releases/latest | ConvertFrom-Json).tag_name
+          $poetry_version = ((Invoke-WebRequest -Uri https://api.github.com/repos/python-poetry/poetry/releases/latest).Content | ConvertFrom-Json).tag_name
         }
         Write-Output "::set-output name=poetry_version::$poetry_version"
 
