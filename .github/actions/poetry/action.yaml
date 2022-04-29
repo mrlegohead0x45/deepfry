@@ -46,8 +46,6 @@ runs:
     - name: Install poetry
       shell: pwsh
       if: steps.cache-poetry.outputs.cache-hit != 'true'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         ${{ github.workspace }}/.github/actions/poetry/script.ps1  `
           -installed_path .installed-poetry `
