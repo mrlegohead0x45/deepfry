@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install and cache poetry
         uses: ClementWalter/poetry-action@v1
@@ -26,9 +28,6 @@ jobs:
       - name: Extract built files
         run: |
           git checkout gh-pages
-
-          # remove other docs files
-          Remove-Item -Recurse ${{ github.workspace }}\docs\build\doctrees\,${{ github.workspace }}\docs\source\
 
           # copy all the html to .
           Move-Item -Force ${{ github.workspace }}\docs\build\html\* .
