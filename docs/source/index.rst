@@ -17,7 +17,6 @@ images. The deepfry package is currently in development. There will also
 be a command line tool for deepfrying images.
 
 
-
 Indices and tables
 ==================
 
