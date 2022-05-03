@@ -17,17 +17,27 @@ on:
       - "docs/source/conf.py"
 
 jobs:
-  test:
+  format:
     runs-on: windows-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install and cache poetry
-        uses: ClementWalter/poetry-action@v1
+      - name: Install python
+        uses: actions/setup-python@v3
         with:
-          os: windows-latest
-          python-version: py3.10
+          python-version: "3.10"
+
+      - name: Install poetry
+        run: python -m pip install poetry
+
+      - name: Cache Poetry deps
+        uses: actions/setup-python@v3
+        with:
+          cache: poetry
+
+      - name: Install deps if they weren't restored from cache
+        run: poetry install
 
       - name: Run black
         run: |

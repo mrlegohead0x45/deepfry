@@ -19,6 +19,12 @@ isort = "^5.10.1"
 Sphinx = "^4.5.0"
 pre-commit = "^2.18.1"
 
+[tool.mypy]
+exclude = "docs/source/conf.py"
+
+[tool.isort]
+profile = "black"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
