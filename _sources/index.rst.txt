@@ -10,6 +10,12 @@ Welcome to deepfry's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Deepfry is a Python package for deepfrying images. It provides a simple
+interface for deepfrying images. It uses the Pillow library to handle
+images. There will be a python package soon, with an api for deepfrying
+images. The deepfry package is currently in development. There will also
+be a command line tool for deepfrying images.
+
 
 
 Indices and tables
